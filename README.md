@@ -26,12 +26,16 @@ echo "This is a highly confidential message containing secret keys." > secret.tx
 sha256sum secret.txt
 Output Hash: ee9a4be92efc841b993454012a95bd0b7601cfd53be2063ba6003c546c968485 `
 
+![File Creation And SHA256](https://github.com/Walcott-iam/Network-Security-lab/blob/main/sha.png)
+
 2. Encrypting the File (Confidentiality)
 We use GPG to encrypt the file. This renders the file unreadable to anyone who does not possess the private key.
 
 `bash
 gpg -c secret.txt`
 ** This generates secret.txt.gpg **
+
+![gpg Encryption](https://github.com/Walcott-iam/Network-Security-lab/blob/main/gpg%20encrption.png)
 
 3. Hosting the Files (The Python Server)
 To simulate a transmission, we host the directory using a simple Python HTTP server.
@@ -49,11 +53,15 @@ Result in Wireshark: The plaintext message is fully visible.
 
 This is a highly confidential message containing secret keys.
 
+![Alt text describing the image](https://github.com/Walcott-iam/Network-Security-lab/blob/main/Unencrypted%20File%20Transfer%20Exposed%20in%20Wireshark.png)
+
 **Requesting the Encrypted File:**
 
 `bash
 curl http://127.0.0.1:8000/secret.txt.gpg --output downloaded_secret.gpg`
 Result in Wireshark: The payload is scrambled and unreadable (ciphertext).
+
+![Alt text describing the image](https://github.com/Walcott-iam/Network-Security-lab/blob/main/Encrypted%20File%20Transfer%20Protected%20In%20Wireshark.png)
 
 ### 🔍 Analysis & Results
 The Vulnerability of HTTP
